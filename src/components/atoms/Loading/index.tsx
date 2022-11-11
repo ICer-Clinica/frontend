@@ -1,10 +1,7 @@
-export default function Loading(): JSX.Element {
+import { CircularProgress, CircularProgressProps } from "@mui/material";
+
+export default function Loading(props: CircularProgressProps): JSX.Element {
   return (
-    <div className="lds-ellipsis">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
+    <CircularProgress {...props} />
   );
 }

@@ -16,7 +16,6 @@ interface ISignin {
 export default function LoginForm() {
   const navigate = useNavigate();
   const {
-    register,
     setValue,
     handleSubmit,
     formState: { errors },
@@ -69,7 +68,7 @@ export default function LoginForm() {
         onChange={handleChange}
       />
       <ButtonAction type="submit" fullWidth variant="contained">
-        {!isLoading ? "Entrar" : <Loading />}
+        {!isLoading ? "Entrar" : <Loading color="secondary" />}
       </ButtonAction>
     </form>
   );
