@@ -43,8 +43,6 @@ export default function LoginForm() {
 
   const onSubmitHandler = async (data: ISignin) => {
     mutate(data);
-
-    reset();
   };
 
   return (
