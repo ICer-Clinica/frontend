@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Divider } from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -26,10 +26,12 @@ export default function ClinicForm() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const [curentStep, setCurrentStep] = useState(1);
-
   const renderStep1 = () => (
-    <>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '15px'
+    }}>
       <InputAction
         label="Nome da clínica"
         variant="outlined"
@@ -39,7 +41,6 @@ export default function ClinicForm() {
         name="name"
         onChange={handleChange}
       />
-      <Divider />
       <InputAction
         label="Rua da clínica"
         variant="outlined"
@@ -74,19 +75,15 @@ export default function ClinicForm() {
           onChange={handleChange}
         />
       </Box>
-      <Button
-        type="button"
-        fullWidth
-        variant="contained"
-        onClick={() => setCurrentStep(2)}
-      >
-        Avançar <Icon icon="ic:baseline-arrow-right-alt" width={30} />
-      </Button>
-    </>
+    </Box>
   );
 
   const renderStep2 = () => (
-    <>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '15px'
+    }}>
       <InputAction
         label="Nome do administrador"
         variant="outlined"
@@ -130,12 +127,7 @@ export default function ClinicForm() {
           onChange={handleChange}
         />
       </Box>
-      <ButtonAction type="submit" fullWidth variant="contained">
-        <>
-          Concluir Cadastro <Icon icon="ic:round-check" width={30} />
-        </>
-      </ButtonAction>
-    </>
+    </Box>
   );
 
   const {
@@ -161,20 +153,31 @@ export default function ClinicForm() {
 
   const onSubmit = async (data: IClinic) => {
     mutate(data);
-
-    reset();
   };
 
   return (
     <form
       style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 20
       }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      {curentStep === 1 ? renderStep1() : renderStep2()}
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+      }}>
+        {renderStep1()}
+        <Divider orientation="vertical" flexItem />
+        {renderStep2()}
+      </Box>
+      <ButtonAction type="submit" fullWidth variant="contained">
+        <>
+          Concluir Cadastro <Icon icon="ic:round-check" width={30} />
+        </>
+      </ButtonAction>
     </form>
   );
 }
