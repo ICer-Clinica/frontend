@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Button, Divider, Grid } from "@mui/material";
+import { Icon } from "@iconify/react";
+import { Divider } from "@mui/material";
 import { Box } from "@mui/system";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,7 +9,6 @@ import ButtonAction from "../../atoms/ButtonAction";
 import InputAction from "../../atoms/InputAction";
 import { createClinic } from "./request";
 import { schema } from "./schema";
-import { Icon } from "@iconify/react";
 
 export interface IClinic {
   name: string;
@@ -30,7 +29,8 @@ export default function ClinicForm() {
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
-      gap: '15px'
+      gap: '15px',
+      width: '100%'
     }}>
       <InputAction
         label="Nome da clínica"
@@ -82,7 +82,8 @@ export default function ClinicForm() {
     <Box sx={{
       display: 'flex',
       flexDirection: 'column',
-      gap: '15px'
+      gap: '15px',
+      width: '100%'
     }}>
       <InputAction
         label="Nome do administrador"
@@ -167,7 +168,8 @@ export default function ClinicForm() {
       <Box sx={{
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        gap: '1rem'
       }}>
         {renderStep1()}
         <Divider orientation="vertical" flexItem />

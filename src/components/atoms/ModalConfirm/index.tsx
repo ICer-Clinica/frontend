@@ -22,24 +22,28 @@ interface ModalConfirmProps {
   open: boolean;
   handleClose: () => void;
   clickConfirm: () => void;
+  title?: string
+  text?: string
 }
 
 export default function ModalConfirm({
   open,
   handleClose,
   clickConfirm,
+  text,
+  title
 }: ModalConfirmProps) {
   return (
     <div>
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
           <TitleText color="primary.main" variant="body1">
-            <b>clinica</b>
+            <b>{title?.toUpperCase()}</b>
           </TitleText>
           <Divider />
           <br />
           <TitleText color="secondary.contrastText" variant="body1">
-            <b>Tem certeza que quer excluir?</b>
+            <b>{text}</b>
           </TitleText>
           <br />
           <Box
