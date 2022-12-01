@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getImageByOption } from "../../../utils/functions/GetImageByRole";
 import PaperAtom from "../PaperAtom";
 import { Icon } from "@iconify/react";
@@ -22,14 +22,14 @@ interface CardListProps {
   name: string;
   id: string;
   type:
-  | "clinic"
-  | "healthSecretary"
-  | "clinicAdms"
-  | "procedures"
-  | "patients"
-  | "coordinators"
-  | "admSecretaries"
-  | "therapists";
+    | "clinic"
+    | "healthSecretary"
+    | "clinicAdms"
+    | "procedures"
+    | "patients"
+    | "coordinators"
+    | "admSecretaries"
+    | "therapists";
 }
 
 export default function CardList({
@@ -41,23 +41,24 @@ export default function CardList({
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const navigate = useNavigate();
 
   const { mutate } = useMutation(
     type === "clinic"
       ? removeClinic
       : type === "healthSecretary"
-        ? removeHealthSecretary
-        : type === "clinicAdms"
-          ? removeClinicAdm
-          : type === "procedures"
-            ? removeProcedures
-            : type === "patients"
-              ? removePatients
-              : type === "coordinators"
-                ? removeCoordinators
-                : type === "admSecretaries"
-                  ? removeAdministrativeSecretaries
-                  : removeTherapists,
+      ? removeHealthSecretary
+      : type === "clinicAdms"
+      ? removeClinicAdm
+      : type === "procedures"
+      ? removeProcedures
+      : type === "patients"
+      ? removePatients
+      : type === "coordinators"
+      ? removeCoordinators
+      : type === "admSecretaries"
+      ? removeAdministrativeSecretaries
+      : removeTherapists,
     {
       onSuccess: (data: any) => {
         window.location.reload();
@@ -165,7 +166,7 @@ export default function CardList({
         handleClose={handleClose}
         open={open}
         clickConfirm={clickDelete}
-        text='Tem certeza que deseja excluir?'
+        text="Tem certeza que deseja excluir?"
         title={humanizeTypes(type)}
       />
     </>
