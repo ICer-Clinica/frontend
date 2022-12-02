@@ -23,12 +23,22 @@ export const superadminRoutes = [
     isPrivate: true,
   },
   {
+    path: `/${identify}/clinics/edit/:id`,
+    element: CreateClinic,
+    isPrivate: true,
+  },
+  {
     path: `/${identify}/health-secretaries`,
     element: HealthSecretaries,
     isPrivate: true,
   },
   {
     path: `/${identify}/health-secretaries/create`,
+    element: CreateHealthSecretarie,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/health-secretaries/edit/:id`,
     element: CreateHealthSecretarie,
     isPrivate: true,
   },

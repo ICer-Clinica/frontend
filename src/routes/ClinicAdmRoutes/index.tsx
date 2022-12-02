@@ -30,12 +30,22 @@ export const clinicAdmRoutes = [
     isPrivate: true,
   },
   {
+    path: `/${identify}/clinic-adm/edit/:id`,
+    element: CreateClinicAdm,
+    isPrivate: true,
+  },
+  {
     path: `/${identify}/procedures`,
     element: Procedures,
     isPrivate: true,
   },
   {
     path: `/${identify}/procedures/create`,
+    element: CreateProcedure,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/procedures/edit/:id`,
     element: CreateProcedure,
     isPrivate: true,
   },
@@ -50,12 +60,22 @@ export const clinicAdmRoutes = [
     isPrivate: true,
   },
   {
+    path: `/${identify}/patients/edit/:id`,
+    element: CreatePatient,
+    isPrivate: true,
+  },
+  {
     path: `/${identify}/coordinators`,
     element: Coordinators,
     isPrivate: true,
   },
   {
     path: `/${identify}/coordinators/create`,
+    element: CreateCoordinator,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/coordinators/edit/:id`,
     element: CreateCoordinator,
     isPrivate: true,
   },
@@ -71,6 +91,11 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/therapists/create`,
+    element: CreateTherapist,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/therapists/edit/:id`,
     element: CreateTherapist,
     isPrivate: true,
   },

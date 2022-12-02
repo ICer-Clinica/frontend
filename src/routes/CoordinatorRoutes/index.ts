@@ -26,6 +26,11 @@ export const coordinatorRoutes = [
     isPrivate: true,
   },
   {
+    path: `/${identify}/procedures/edit/:id`,
+    element: CreateProcedure,
+    isPrivate: true,
+  },
+  {
     path: `/${identify}/administrative-secretaries`,
     element: AdministrativeSecretaries,
     isPrivate: true,
@@ -41,12 +46,22 @@ export const coordinatorRoutes = [
     isPrivate: true,
   },
   {
+    path: `/${identify}/therapists/edit/:id`,
+    element: CreateTherapist,
+    isPrivate: true,
+  },
+  {
     path: `/${identify}/patients`,
     element: Patients,
     isPrivate: true,
   },
   {
     path: `/${identify}/patients/create`,
+    element: CreatePatient,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/patients/edit/:id`,
     element: CreatePatient,
     isPrivate: true,
   },

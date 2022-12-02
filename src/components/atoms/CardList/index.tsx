@@ -138,6 +138,7 @@ export default function CardList({
                 border: 0,
                 cursor: "pointer",
               }}
+              onClick={() => navigate(`${pathname}/edit/${id}`)}
             >
               <Icon icon="ic:baseline-edit" width={30} />
             </button>
