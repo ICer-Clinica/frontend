@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Tooltip, Typography } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getImageByOption } from "../../../utils/functions/GetImageByRole";
 import PaperAtom from "../PaperAtom";
@@ -124,42 +124,46 @@ export default function CardList({
               gap: 1,
             }}
           >
-            <button
-              style={{
-                width: 40,
-                height: 40,
-                color: "#DD404D",
-                backgroundColor: "primary.dark",
-                borderRadius: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                outline: "none",
-                border: 0,
-                cursor: "pointer",
-              }}
-              onClick={() => navigate(`${pathname}/edit/${id}`)}
-            >
-              <Icon icon="ic:baseline-edit" width={30} />
-            </button>
-            <button
-              onClick={handleOpen}
-              style={{
-                width: 40,
-                height: 40,
-                color: "white",
-                backgroundColor: "#DD404D",
-                borderRadius: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                outline: "none",
-                border: 0,
-                cursor: "pointer",
-              }}
-            >
-              <Icon icon="ic:baseline-delete-forever" width={30} />
-            </button>
+            <Tooltip title="Editar">
+              <button
+                style={{
+                  width: 40,
+                  height: 40,
+                  color: "#DD404D",
+                  backgroundColor: "primary.dark",
+                  borderRadius: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  outline: "none",
+                  border: 0,
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate(`${pathname}/edit/${id}`)}
+              >
+                <Icon icon="ic:baseline-edit" width={30} />
+              </button>
+            </Tooltip>
+            <Tooltip title="Remover">
+              <button
+                onClick={handleOpen}
+                style={{
+                  width: 40,
+                  height: 40,
+                  color: "white",
+                  backgroundColor: "#DD404D",
+                  borderRadius: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  outline: "none",
+                  border: 0,
+                  cursor: "pointer",
+                }}
+              >
+                <Icon icon="ic:baseline-delete-forever" width={30} />
+              </button>
+            </Tooltip>
           </Box>
         </Box>
       </button>
