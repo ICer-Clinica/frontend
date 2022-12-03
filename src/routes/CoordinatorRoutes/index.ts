@@ -1,4 +1,5 @@
 import AdministrativeSecretaries from "../../pages/Coordinator/AdministrativeSecretaries";
+import CreateAdministrativeSecretaries from "../../pages/Coordinator/AdministrativeSecretaries/CreateAdministrativeSecretaries";
 import Dashboard from "../../pages/Coordinator/Dashboard";
 import Patients from "../../pages/Coordinator/Patients";
 import CreatePatient from "../../pages/Coordinator/Patients/CreatePatient";
@@ -33,6 +34,16 @@ export const coordinatorRoutes = [
   {
     path: `/${identify}/administrative-secretaries`,
     element: AdministrativeSecretaries,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/administrative-secretaries/create`,
+    element: CreateAdministrativeSecretaries,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/administrative-secretaries/edit`,
+    element: CreateAdministrativeSecretaries,
     isPrivate: true,
   },
   {
