@@ -1,8 +1,8 @@
+import Patient from "../../components/Forms/Patients";
+import Therapist from "../../components/Forms/Therapist";
 import Dashboard from "../../pages/AdmSecretary/Dashboard";
 import Patients from "../../pages/AdmSecretary/Patients";
-import CreatePatient from "../../pages/AdmSecretary/Patients/CreatePatient";
 import Therapists from "../../pages/AdmSecretary/Therapists";
-import CreateTherapist from "../../pages/AdmSecretary/Therapists/CreateTherapist";
 
 const identify = "admnistrativeSecretary";
 
@@ -19,12 +19,12 @@ export const admSecretaryRoutes = [
   },
   {
     path: `/${identify}/therapists/create`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
   {
     path: `/${identify}/therapists/edit/:id`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
   {
@@ -34,12 +34,12 @@ export const admSecretaryRoutes = [
   },
   {
     path: `/${identify}/patients/create`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
   {
     path: `/${identify}/patients/edit/:id`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
 ];

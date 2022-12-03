@@ -1,8 +1,8 @@
+import Clinic from "../../components/Forms/Clinic";
+import HealthSecretary from "../../components/Forms/HealthSecretary";
 import Clinics from "../../pages/Superadmin/Clinics";
-import CreateClinic from "../../pages/Superadmin/Clinics/CreateClinic";
 import Dashboard from "../../pages/Superadmin/Dashboard";
 import HealthSecretaries from "../../pages/Superadmin/HealthSecretaries";
-import CreateHealthSecretarie from "../../pages/Superadmin/HealthSecretaries/CreateHealthSecretarie";
 
 const identify = "superadmin";
 
@@ -19,12 +19,12 @@ export const superadminRoutes = [
   },
   {
     path: `/${identify}/clinic/create`,
-    element: CreateClinic,
+    element: Clinic,
     isPrivate: true,
   },
   {
     path: `/${identify}/clinics/edit/:id`,
-    element: CreateClinic,
+    element: Clinic,
     isPrivate: true,
   },
   {
@@ -34,12 +34,12 @@ export const superadminRoutes = [
   },
   {
     path: `/${identify}/health-secretaries/create`,
-    element: CreateHealthSecretarie,
+    element: HealthSecretary,
     isPrivate: true,
   },
   {
     path: `/${identify}/health-secretaries/edit/:id`,
-    element: CreateHealthSecretarie,
+    element: HealthSecretary,
     isPrivate: true,
   },
 ];

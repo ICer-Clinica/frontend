@@ -1,11 +1,11 @@
 import { Box, Divider } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import PaperAtom from "../../../../components/atoms/PaperAtom";
-import TitleText from "../../../../components/atoms/TitleText";
-import CoordinatorForm from "../../../../components/molecules/CoordinatorForm";
-import { CreateOrEdit } from "../../../../utils/functions/CreateOrEdit";
+import { CreateOrEdit } from "../../../utils/functions/CreateOrEdit";
+import PaperAtom from "../../atoms/PaperAtom";
+import TitleText from "../../atoms/TitleText";
+import CoordinatorForm from "../../molecules/CoordinatorForm";
 
-export default function CreateCoordinator() {
+export default function Coordinator() {
   const { pathname } = useLocation();
 
   return (

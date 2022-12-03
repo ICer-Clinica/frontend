@@ -1,12 +1,12 @@
+import AdministrativeSecretary from "../../components/Forms/AdministrativeSecretaries";
+import Patient from "../../components/Forms/Patients";
+import Procedure from "../../components/Forms/Procedures";
+import Therapist from "../../components/Forms/Therapist";
 import AdministrativeSecretaries from "../../pages/Coordinator/AdministrativeSecretaries";
-import CreateAdministrativeSecretaries from "../../pages/Coordinator/AdministrativeSecretaries/CreateAdministrativeSecretaries";
 import Dashboard from "../../pages/Coordinator/Dashboard";
 import Patients from "../../pages/Coordinator/Patients";
-import CreatePatient from "../../pages/Coordinator/Patients/CreatePatient";
 import Procedures from "../../pages/Coordinator/Procedures";
-import CreateProcedure from "../../pages/Coordinator/Procedures/CreateProcedure";
 import Therapists from "../../pages/Coordinator/Therapists";
-import CreateTherapist from "../../pages/Coordinator/Therapists/CreateTherapist";
 
 const identify = "coordinator";
 
@@ -23,12 +23,12 @@ export const coordinatorRoutes = [
   },
   {
     path: `/${identify}/procedures/create`,
-    element: CreateProcedure,
+    element: Procedure,
     isPrivate: true,
   },
   {
     path: `/${identify}/procedures/edit/:id`,
-    element: CreateProcedure,
+    element: Procedure,
     isPrivate: true,
   },
   {
@@ -38,12 +38,12 @@ export const coordinatorRoutes = [
   },
   {
     path: `/${identify}/administrative-secretaries/create`,
-    element: CreateAdministrativeSecretaries,
+    element: AdministrativeSecretary,
     isPrivate: true,
   },
   {
     path: `/${identify}/administrative-secretaries/edit`,
-    element: CreateAdministrativeSecretaries,
+    element: AdministrativeSecretary,
     isPrivate: true,
   },
   {
@@ -53,12 +53,12 @@ export const coordinatorRoutes = [
   },
   {
     path: `/${identify}/therapists/create`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
   {
     path: `/${identify}/therapists/edit/:id`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
   {
@@ -68,12 +68,12 @@ export const coordinatorRoutes = [
   },
   {
     path: `/${identify}/patients/create`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
   {
     path: `/${identify}/patients/edit/:id`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
 ];

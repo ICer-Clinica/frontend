@@ -1,11 +1,11 @@
 import { Box, Divider } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import PaperAtom from "../../../../components/atoms/PaperAtom";
-import TitleText from "../../../../components/atoms/TitleText";
-import ClinicAdmForm from "../../../../components/molecules/ClinicAdmForm";
-import { CreateOrEdit } from "../../../../utils/functions/CreateOrEdit";
+import { CreateOrEdit } from "../../../utils/functions/CreateOrEdit";
+import PaperAtom from "../../atoms/PaperAtom";
+import TitleText from "../../atoms/TitleText";
+import ClinicAdmForm from "../../molecules/ClinicAdmForm";
 
-export default function CreateClinicAdm() {
+export default function ClinicAdm() {
   const { pathname } = useLocation();
 
   return (

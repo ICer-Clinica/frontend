@@ -1,16 +1,16 @@
+import AdministrativeSecretary from "../../components/Forms/AdministrativeSecretaries";
+import ClinicAdm from "../../components/Forms/ClinicAdm";
+import Coordinator from "../../components/Forms/Coordinator";
+import Patient from "../../components/Forms/Patients";
+import Procedure from "../../components/Forms/Procedures";
+import Therapist from "../../components/Forms/Therapist";
 import AdministrativeSecretaries from "../../pages/ClinicAdm/AdministrativeSecretaries";
 import ClinicAdms from "../../pages/ClinicAdm/ClinicAdms";
-import CreateClinicAdm from "../../pages/ClinicAdm/ClinicAdms/CreateClinicAdm";
 import Coordinators from "../../pages/ClinicAdm/Coordinators";
-import CreateCoordinator from "../../pages/ClinicAdm/Coordinators/CreateCoordinator";
 import Dashboard from "../../pages/ClinicAdm/Dashboard";
 import Patients from "../../pages/ClinicAdm/Patients";
-import CreatePatient from "../../pages/ClinicAdm/Patients/CreatePatient";
 import Procedures from "../../pages/ClinicAdm/Procedures";
-import CreateProcedure from "../../pages/ClinicAdm/Procedures/CreateProcedure";
 import Therapists from "../../pages/ClinicAdm/Therapists";
-import CreateTherapist from "../../pages/ClinicAdm/Therapists/CreateTherapist";
-import CreateAdministrativeSecretaries from "../../pages/Coordinator/AdministrativeSecretaries/CreateAdministrativeSecretaries";
 
 const identify = "clinicAdm";
 
@@ -27,12 +27,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/clinic-adm/create`,
-    element: CreateClinicAdm,
+    element: ClinicAdm,
     isPrivate: true,
   },
   {
     path: `/${identify}/clinic-adm/edit/:id`,
-    element: CreateClinicAdm,
+    element: ClinicAdm,
     isPrivate: true,
   },
   {
@@ -42,12 +42,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/procedures/create`,
-    element: CreateProcedure,
+    element: Procedure,
     isPrivate: true,
   },
   {
     path: `/${identify}/procedures/edit/:id`,
-    element: CreateProcedure,
+    element: Procedure,
     isPrivate: true,
   },
   {
@@ -57,12 +57,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/patients/create`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
   {
     path: `/${identify}/patients/edit/:id`,
-    element: CreatePatient,
+    element: Patient,
     isPrivate: true,
   },
   {
@@ -72,12 +72,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/coordinators/create`,
-    element: CreateCoordinator,
+    element: Coordinator,
     isPrivate: true,
   },
   {
     path: `/${identify}/coordinators/edit/:id`,
-    element: CreateCoordinator,
+    element: Coordinator,
     isPrivate: true,
   },
   {
@@ -87,12 +87,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/administrative-secretaries/create`,
-    element: CreateAdministrativeSecretaries,
+    element: AdministrativeSecretary,
     isPrivate: true,
   },
   {
     path: `/${identify}/administrative-secretaries/edit`,
-    element: CreateAdministrativeSecretaries,
+    element: AdministrativeSecretary,
     isPrivate: true,
   },
   {
@@ -102,12 +102,12 @@ export const clinicAdmRoutes = [
   },
   {
     path: `/${identify}/therapists/create`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
   {
     path: `/${identify}/therapists/edit/:id`,
-    element: CreateTherapist,
+    element: Therapist,
     isPrivate: true,
   },
 ];
