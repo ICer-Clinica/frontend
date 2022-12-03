@@ -7,4 +7,5 @@ export const superadminEndpoints = {
   deleteClinic: (clinic_id: string) => `/clinic/${clinic_id}`,
   createClinicAdm: "/clinic-adm",
   createHealthSecretary: "/health-secretaries",
+  createAdministrativeSecretary: "/adm-secretary",
 };
