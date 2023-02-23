@@ -7,7 +7,7 @@ import { useMutation } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import ButtonAction from "../../atoms/ButtonAction";
 import InputAction from "../../atoms/InputAction";
-import { createClinic } from "./request";
+import { createClinic, updateClinic } from "./request";
 import { schema } from "./schema";
 
 export interface IClinic {
@@ -21,17 +21,39 @@ export interface IClinic {
   confirmPassword: string;
 }
 
-export default function ClinicForm() {
+interface IClinicForm {
+  type: "CREATE" | "UPDATE";
+}
+
+export default function ClinicForm({ type }: IClinicForm) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const { mutate } = useMutation(createClinic, {
+    onSuccess: (data: any) => {
+      navigate(`/${pathname.split("/")[1]}/clinics`);
+    },
+    onError: (error) => {
+      alert(error);
+    },
+  });
+  const { mutate: updateClinicMutate } = useMutation(updateClinic, {
+    onSuccess: (data: any) => {
+      navigate(`/${pathname.split("/")[1]}/clinics`);
+    },
+    onError: (error) => {
+      alert(error);
+    },
+  });
 
   const renderStep1 = () => (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '15px',
-      width: '100%'
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "15px",
+        width: "100%",
+      }}
+    >
       <InputAction
         label="Nome da clínica"
         variant="outlined"
@@ -79,12 +101,14 @@ export default function ClinicForm() {
   );
 
   const renderStep2 = () => (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '15px',
-      width: '100%'
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "15px",
+        width: "100%",
+      }}
+    >
       <InputAction
         label="Nome do administrador"
         variant="outlined"
@@ -143,34 +167,37 @@ export default function ClinicForm() {
     setValue(event.target.name, event.target.value);
   };
 
-  const { mutate } = useMutation(createClinic, {
-    onSuccess: (data: any) => {
-      navigate(`/${pathname.split("/")[1]}/clinics`);
-    },
-    onError: (error) => {
-      alert(error);
-    },
-  });
-
   const onSubmit = async (data: IClinic) => {
-    mutate(data);
+    if (type === "CREATE") {
+      mutate(data);
+    }
+    if (type === "UPDATE") {
+      updateClinicMutate({
+        ...data,
+        address_id: "1",
+        adm_id: "1",
+        clinic_id: "1",
+      });
+    }
   };
 
   return (
     <form
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 20
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
       }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box sx={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        gap: '1rem'
-      }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          gap: "1rem",
+        }}
+      >
         {renderStep1()}
         <Divider orientation="vertical" flexItem />
         {renderStep2()}

@@ -10,6 +10,8 @@ interface InputActionProps {
   disabled?: boolean;
   name?: string;
   onChange?: (event: any) => void;
+  value?: string | number;
+  shrink?: boolean;
 }
 
 export default function InputAction({
@@ -22,6 +24,8 @@ export default function InputAction({
   disabled,
   name,
   onChange,
+  value,
+  shrink,
 }: InputActionProps) {
   return (
     <TextField
@@ -34,6 +38,10 @@ export default function InputAction({
       name={name}
       onChange={onChange}
       sx={{ width: size }}
+      value={value}
+      InputLabelProps={{
+        shrink: Boolean(shrink),
+      }}
     />
   );
 }

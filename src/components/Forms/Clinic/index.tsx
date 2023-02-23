@@ -15,7 +15,7 @@ export default function Clinic() {
       </TitleText>
       <Divider sx={{ marginBottom: "12px" }} />
       <PaperAtom size="100%">
-        <ClinicForm />
+        <ClinicForm type="CREATE" />
       </PaperAtom>
     </Box>
   );

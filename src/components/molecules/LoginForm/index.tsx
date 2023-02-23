@@ -56,6 +56,7 @@ export default function LoginForm() {
         required
         type="email"
         name="email"
+        shrink={true}
         onChange={handleChange}
       />
       <InputAction
@@ -65,6 +66,7 @@ export default function LoginForm() {
         fullWidth
         required
         name="password"
+        shrink={true}
         onChange={handleChange}
       />
       <ButtonAction type="submit" fullWidth variant="contained">
