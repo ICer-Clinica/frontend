@@ -61,6 +61,7 @@ export default function CoordinatorForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputAction
+        shrink={true}
         label="Nome do Coordenador"
         variant="outlined"
         fullWidth
@@ -70,6 +71,7 @@ export default function CoordinatorForm() {
         onChange={handleChange}
       />
       <InputAction
+        shrink={true}
         label="E-mail do Coordenador"
         variant="outlined"
         fullWidth
@@ -85,6 +87,7 @@ export default function CoordinatorForm() {
         }}
       >
         <InputAction
+          shrink={true}
           label="Senha do Coordenador"
           variant="outlined"
           fullWidth
@@ -94,6 +97,7 @@ export default function CoordinatorForm() {
           onChange={handleChange}
         />
         <InputAction
+          shrink={true}
           label="Confirmação de senha"
           variant="outlined"
           fullWidth

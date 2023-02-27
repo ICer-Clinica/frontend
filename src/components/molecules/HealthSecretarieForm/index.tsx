@@ -54,19 +54,22 @@ export default function HealthSecretarieForm() {
   return (
     <form
       style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
       }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <Box style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 20,
-        width: '50%'
-      }}>
+      <Box
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 20,
+          width: "50%",
+        }}
+      >
         <InputAction
+          shrink={true}
           label="Nome do Secretário"
           variant="outlined"
           fullWidth
@@ -76,6 +79,7 @@ export default function HealthSecretarieForm() {
           onChange={handleChange}
         />
         <InputAction
+          shrink={true}
           label="E-mail do Secretário"
           variant="outlined"
           fullWidth
@@ -91,6 +95,7 @@ export default function HealthSecretarieForm() {
           }}
         >
           <InputAction
+            shrink={true}
             label="Senha do Secretário"
             variant="outlined"
             fullWidth
@@ -100,6 +105,7 @@ export default function HealthSecretarieForm() {
             onChange={handleChange}
           />
           <InputAction
+            shrink={true}
             label="Confirmação de senha"
             variant="outlined"
             fullWidth

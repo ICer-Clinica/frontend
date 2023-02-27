@@ -20,12 +20,15 @@ export interface ITherapist {
 }
 
 export interface ISelect {
-  label: string
-  value: string
+  label: string;
+  value: string;
 }
 
 const offices = [
-  {label: 'Psicologo', value: 'psicologo'}
+  { label: "Psicologo", value: "PSYCHOLOGY" },
+  { label: "Fisioterapeuta", value: "PHYSIOTHERAPY" },
+  { label: "Fonoaudiólogo", value: "PHONOAUDIOLOGY" },
+  { label: "Terapeuta Ocupacional", value: "OCCUPATIONAL_THERAPY" },
 ] as ISelect[];
 
 export default function TherapistForm() {
@@ -43,7 +46,7 @@ export default function TherapistForm() {
 
   const handleChange = (event: any) => {
     console.log(event.target.name, event.target.value);
-    
+
     setValue(event.target.name, event.target.value);
     setError("confirmPassword", {
       type: "custom",
@@ -80,6 +83,7 @@ export default function TherapistForm() {
         required
         type="text"
         name="name"
+        shrink={true}
         onChange={handleChange}
       />
       <InputAction
@@ -89,10 +93,15 @@ export default function TherapistForm() {
         required
         type="text"
         name="email"
+        shrink={true}
         onChange={handleChange}
       />
-      <Select label="Profissão do Terapeuta" values={offices} name="office"
-        onChange={handleChange} />
+      <Select
+        label="Profissão do Terapeuta"
+        values={offices}
+        name="office"
+        onChange={handleChange}
+      />
       <Box
         sx={{
           display: "flex",
@@ -106,6 +115,7 @@ export default function TherapistForm() {
           required
           type="password"
           name="password"
+          shrink={true}
           onChange={handleChange}
         />
         <InputAction
@@ -115,6 +125,7 @@ export default function TherapistForm() {
           required
           type="password"
           name="confirmPassword"
+          shrink={true}
           onChange={handleChange}
         />
       </Box>

@@ -53,6 +53,7 @@ export default function ProcedureForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputAction
+        shrink={true}
         label="Código do Procedimento"
         variant="outlined"
         fullWidth
@@ -62,6 +63,7 @@ export default function ProcedureForm() {
         onChange={handleChange}
       />
       <InputAction
+        shrink={true}
         label="Nome do Procedimento"
         variant="outlined"
         fullWidth

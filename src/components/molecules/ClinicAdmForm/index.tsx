@@ -64,6 +64,7 @@ export default function ClinicAdmForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputAction
+        shrink={true}
         label="Nome do Administrador"
         variant="outlined"
         fullWidth
@@ -73,6 +74,7 @@ export default function ClinicAdmForm() {
         onChange={handleChange}
       />
       <InputAction
+        shrink={true}
         label="E-mail do Administrador"
         variant="outlined"
         fullWidth
@@ -88,6 +90,7 @@ export default function ClinicAdmForm() {
         }}
       >
         <InputAction
+          shrink={true}
           label="Senha do Administrador"
           variant="outlined"
           fullWidth
@@ -97,6 +100,7 @@ export default function ClinicAdmForm() {
           onChange={handleChange}
         />
         <InputAction
+          shrink={true}
           label="Confirmação de senha"
           variant="outlined"
           fullWidth
