@@ -1,12 +1,27 @@
+import { Icon } from "@iconify/react";
+import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import {
+  removeAdministrativeSecretaries,
+  removeCoordinators,
+} from "../../../components/atoms/CardList/request";
+import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
 import { ApiService } from "../../../config/api";
 import { clinicAdmEndpoints } from "../../../utils/endpoints/clinicAdm";
 import { getClinicID } from "../../../utils/functions/GetClinicID";
+import { humanizeTypes } from "../../../utils/functions/Humanize";
 
 export default function AdministrativeSecretaries() {
   const [admSecretaries, setAdmSecretaries] = useState([]);
+
+  const [open, setOpen] = useState({
+    opened: false,
+    id: "",
+  });
+  const handleOpen = (id: string) => setOpen({ opened: true, id });
+  const handleClose = () => setOpen({ opened: false, id: "" });
 
   const fetchAdmSecretaries = async () => {
     const api = new ApiService();
@@ -25,14 +40,80 @@ export default function AdministrativeSecretaries() {
     },
   });
 
+  const { mutate, isLoading: mutateIsLoading } = useMutation(
+    removeAdministrativeSecretaries,
+    {
+      onSuccess: (data: any) => {
+        window.location.reload();
+      },
+      onError: (error) => {
+        alert(error);
+      },
+    }
+  );
+
+  const clickDelete = () => {
+    mutate(open.id);
+  };
+
+  const rows: any = [];
+  admSecretaries &&
+    admSecretaries?.forEach((clinic: any) => {
+      const data = {
+        name: clinic?.name,
+        email: clinic?.email,
+        created_at: new Date(clinic?.created_at)?.toLocaleDateString("pt-br"),
+        actions: (
+          <Tooltip title="Remover">
+            <button
+              onClick={() => handleOpen(clinic?.id)}
+              style={{
+                width: 40,
+                height: 40,
+                color: "white",
+                backgroundColor: "#DD404D",
+                borderRadius: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                outline: "none",
+                border: 0,
+                cursor: "pointer",
+              }}
+            >
+              <Icon icon="ic:baseline-delete-forever" width={30} />
+            </button>
+          </Tooltip>
+        ),
+      };
+      rows.push(data);
+    });
+
   return (
-    <Listing
-      textButton="Cadastrar Secretário Adm."
-      title="Esses são os Secretários cadastrados."
-      data={admSecretaries}
-      type="admSecretaries"
-      isLoading={isLoading}
-      link="/coordinator/administrative-secretaries/create"
-    />
+    <>
+      <Listing
+        textButton="Cadastrar Secretário Adm."
+        title="Secretários"
+        data={admSecretaries}
+        type="admSecretaries"
+        isLoading={isLoading}
+        link="/clinicAdm/administrative-secretaries/create"
+        columns={[
+          { label: "Nome", value: "name" },
+          { label: "E-mail", value: "email" },
+          { label: "Criado em", value: "created_at" },
+          { label: "Ações", value: "actions" },
+        ]}
+        rows={rows}
+      />
+      <ModalConfirm
+        handleClose={handleClose}
+        open={open.opened}
+        clickConfirm={clickDelete}
+        text="Tem certeza que deseja excluir?"
+        title={humanizeTypes("clinic")}
+        isLoading={mutateIsLoading}
+      />
+    </>
   );
 }

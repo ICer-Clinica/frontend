@@ -21,6 +21,7 @@ const LightTheme = createTheme({
   },
   typography: {
     allVariants: {
+      fontFamily: "Poppins",
       color: "#F0F0F0",
     },
     h1: {

@@ -7,6 +7,7 @@ import Loading from "../../atoms/Loading";
 import { reqSuccess, requestAuth } from "./request";
 import { schema } from "./schema";
 import { useNavigate } from "react-router-dom";
+import ErrorMessage from "../../atoms/ErrorMessage";
 
 interface ISignin {
   email: string;
@@ -15,25 +16,22 @@ interface ISignin {
 
 export default function LoginForm() {
   const navigate = useNavigate();
-  const {
-    setValue,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ISignin>({ resolver: yupResolver(schema) });
+  const { setValue, handleSubmit } = useForm<ISignin>({
+    resolver: yupResolver(schema),
+  });
 
   const handleChange = (event: any) => {
     setValue(event.target.name, event.target.value);
   };
 
-  const { isLoading, mutate, isSuccess, data } = useMutation(requestAuth, {
-    onSuccess: (data: any) => {
-      reqSuccess(data);
-    },
-    onError: (error) => {
-      alert(error);
-    },
-  });
+  const { isLoading, mutate, isSuccess, data, isError } = useMutation(
+    requestAuth,
+    {
+      onSuccess: (data: any) => {
+        reqSuccess(data);
+      },
+    }
+  );
 
   if (isSuccess) {
     const { user } = data as any;
@@ -69,6 +67,7 @@ export default function LoginForm() {
         shrink={true}
         onChange={handleChange}
       />
+      {isError ? <ErrorMessage /> : null}
       <ButtonAction type="submit" fullWidth variant="contained">
         {!isLoading ? "Entrar" : <Loading color="secondary" />}
       </ButtonAction>

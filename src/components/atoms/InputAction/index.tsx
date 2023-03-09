@@ -37,7 +37,7 @@ export default function InputAction({
       disabled={disabled}
       name={name}
       onChange={onChange}
-      sx={{ width: size }}
+      sx={{ width: size, borderRadius: "30px" }}
       value={value}
       InputLabelProps={{
         shrink: Boolean(shrink),

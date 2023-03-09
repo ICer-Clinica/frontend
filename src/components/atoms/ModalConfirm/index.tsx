@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 import TitleText from "../TitleText";
 import { Divider } from "@mui/material";
+import Loading from "../Loading";
 
 const style = {
   position: "absolute" as "absolute",
@@ -22,8 +23,9 @@ interface ModalConfirmProps {
   open: boolean;
   handleClose: () => void;
   clickConfirm: () => void;
-  title?: string
-  text?: string
+  title?: string;
+  text?: string;
+  isLoading?: boolean;
 }
 
 export default function ModalConfirm({
@@ -31,7 +33,8 @@ export default function ModalConfirm({
   handleClose,
   clickConfirm,
   text,
-  title
+  title,
+  isLoading,
 }: ModalConfirmProps) {
   return (
     <div>
@@ -58,6 +61,7 @@ export default function ModalConfirm({
               variant="text"
               color="error"
               fullWidth
+              disabled={isLoading}
             >
               NÃO
             </Button>
@@ -68,7 +72,7 @@ export default function ModalConfirm({
               color="success"
               onClick={clickConfirm}
             >
-              SIM
+              {!isLoading ? "SIM" : <Loading color="primary" />}
             </Button>
           </Box>
         </Box>
