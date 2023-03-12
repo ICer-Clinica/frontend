@@ -1,55 +1,19 @@
 import { Box, Grid } from "@mui/material";
-import Chart from "react-google-charts";
+import { Chart as ChartJS } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import { useQuery } from "react-query";
 import DashboardCard from "../../../components/atoms/DashboardCard";
-import { ApiService } from "../../../config/api";
-import { clinicAdmEndpoints } from "../../../utils/endpoints/clinicAdm";
-import { getClinicID } from "../../../utils/functions/GetClinicID";
+import { chartJSRegister } from "../../../utils/functions/chartJSRegister";
+import {
+  getRanking,
+  getRankingThisMonth,
+  getTotalOfAttendances,
+  getTotalOfAttendancesThisMonth,
+  getTotalOfPatients,
+  getTotalOfTherapists,
+} from "./Dashboard.service";
 
 export default function Dashboard() {
-  const getRanking = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.rankingOfTherapists(getClinicID())
-    );
-  };
-  const getRankingThisMonth = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.rankingOfTherapistsThisMonth(getClinicID())
-    );
-  };
-  const getTotalOfTherapists = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.totalOfTherapists(getClinicID())
-    );
-  };
-  const getTotalOfPatients = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.totalOfPatients(getClinicID())
-    );
-  };
-  const getTotalOfAttendances = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.totalOfAttendances(getClinicID())
-    );
-  };
-  const getTotalOfAttendancesThisMonth = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      clinicAdmEndpoints.totalOfAttendancesThisMonth(getClinicID())
-    );
-  };
-
   const { isLoading: getRankingIsLoading, data: ranking } = useQuery(
     "ranking",
     getRanking
@@ -75,39 +39,35 @@ export default function Dashboard() {
 
   const rankingOfTherapists = ranking as any[];
 
-  const formattedRankingOfTherapists = [
-    [
-      "Element",
-      "Terapeutas com mais atendimentos realizados",
-      { role: "style" },
-    ],
-  ];
-
-  rankingOfTherapists?.forEach((therapist) => {
-    formattedRankingOfTherapists.push([
-      therapist?.therapistName,
-      therapist?.attendances,
-      "#F84B5A",
-    ]);
-  });
-
   const rankingOfTherapistsThisMonth = rankingThisMonth as any[];
 
-  const formattedRankingOfTherapistsThisMonth = [
-    [
-      "Element",
-      "Terapeutas com mais atendimentos realizados neste mês",
-      { role: "style" },
-    ],
-  ];
+  ChartJS.register({ ...chartJSRegister });
 
-  rankingOfTherapistsThisMonth?.forEach((therapist) => {
-    formattedRankingOfTherapistsThisMonth.push([
-      therapist?.therapistName,
-      therapist?.attendances,
-      "#F84B5A",
-    ]);
-  });
+  const rankingOfTherapistsData = {
+    labels: rankingOfTherapists?.map((therapist) => therapist?.therapistName),
+    datasets: [
+      {
+        label: "Atendimentos",
+        data: rankingOfTherapists?.map((therapist) => therapist?.attendances),
+        backgroundColor: "rgba(248, 75, 90, 0.7)",
+      },
+    ],
+  };
+
+  const rankingOfTherapistsThisMonthData = {
+    labels: rankingOfTherapistsThisMonth?.map(
+      (therapist) => therapist?.therapistName
+    ),
+    datasets: [
+      {
+        label: "Atendimentos",
+        data: rankingOfTherapistsThisMonth?.map(
+          (therapist) => therapist?.attendances
+        ),
+        backgroundColor: "rgba(248, 75, 90, 0.7)",
+      },
+    ],
+  };
 
   return (
     <Box
@@ -151,23 +111,32 @@ export default function Dashboard() {
 
       <Grid container spacing={2} sx={{ height: "100%", maxHeight: "100%" }}>
         <Grid item xs={6}>
-          <Chart
-            chartType="ColumnChart"
-            width="100%"
-            height="100%"
-            data={formattedRankingOfTherapists}
+          <Bar
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top" as const,
+                },
+              },
+            }}
+            data={rankingOfTherapistsData}
           />
         </Grid>
         <Grid item xs={6}>
-          <Chart
-            chartType="ColumnChart"
-            width="100%"
-            height="100%"
-            data={formattedRankingOfTherapistsThisMonth}
+          <Bar
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top" as const,
+                },
+              },
+            }}
+            data={rankingOfTherapistsThisMonthData}
           />
         </Grid>
       </Grid>
     </Box>
   );
 }
-

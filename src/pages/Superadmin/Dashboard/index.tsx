@@ -1,47 +1,21 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { Chart } from "react-google-charts";
+import { Chart as ChartJS } from "chart.js";
+import { Bar } from "react-chartjs-2";
 import { useQuery } from "react-query";
 import DashboardCard from "../../../components/atoms/DashboardCard";
-import { ApiService } from "../../../config/api";
-import { superadminEndpoints } from "../../../utils/endpoints/superadmin";
+import { chartJSRegister } from "../../../utils/functions/chartJSRegister";
+import {
+  getRanking,
+  getRankingThisMonth,
+  getTotalOfAttendances,
+  getTotalOfAttendancesThisMonth,
+  getTotalOfClinics,
+  getTotalOfPatients,
+  getTotalOfTherapists,
+} from "./Dashboard.service";
 
 export default function Dashboard() {
-  const getRanking = async () => {
-    const api = new ApiService();
-    return api.RequestData("GET", superadminEndpoints.rankingOfCLinics());
-  };
-  const getRankingThisMonth = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      superadminEndpoints.rankingOfCLinicsThisMonth()
-    );
-  };
-  const getTotalOfClinics = async () => {
-    const api = new ApiService();
-    return api.RequestData("GET", superadminEndpoints.totalOfClinics());
-  };
-  const getTotalOfTherapists = async () => {
-    const api = new ApiService();
-    return api.RequestData("GET", superadminEndpoints.totalOfTherapists());
-  };
-  const getTotalOfPatients = async () => {
-    const api = new ApiService();
-    return api.RequestData("GET", superadminEndpoints.totalOfPatients());
-  };
-  const getTotalOfAttendances = async () => {
-    const api = new ApiService();
-    return api.RequestData("GET", superadminEndpoints.totalOfAttendances());
-  };
-  const getTotalOfAttendancesThisMonth = async () => {
-    const api = new ApiService();
-    return api.RequestData(
-      "GET",
-      superadminEndpoints.totalOfAttendancesThisMonth()
-    );
-  };
-
   const { isLoading: getRankingIsLoading, data: ranking } = useQuery(
     "ranking",
     getRanking
@@ -71,31 +45,31 @@ export default function Dashboard() {
 
   const rankingOfClinics = ranking as any[];
 
-  const formattedRankingOfClinics = [
-    ["Element", "Atendimentos Realizados", { role: "style" }],
-  ];
-
-  rankingOfClinics?.forEach((clinic) => {
-    formattedRankingOfClinics.push([
-      clinic?.clinicName,
-      clinic?.attendances,
-      "#F84B5A",
-    ]);
-  });
-
   const rankingOfClinicsThisMonth = rankingThisMonth as any[];
 
-  const formattedRankingOfClinicsThisMonth = [
-    ["Element", "Atendimentos realizados neste mês", { role: "style" }],
-  ];
+  ChartJS.register({ ...chartJSRegister });
 
-  rankingOfClinicsThisMonth?.forEach((clinic) => {
-    formattedRankingOfClinicsThisMonth.push([
-      clinic?.clinicName,
-      clinic?.attendances,
-      "#F84B5A",
-    ]);
-  });
+  const rankingOfClinicsData = {
+    labels: rankingOfClinics?.map((clinic) => clinic?.clinicName),
+    datasets: [
+      {
+        label: "Atendimentos",
+        data: rankingOfClinics?.map((clinic) => clinic?.attendances),
+        backgroundColor: "rgba(248, 75, 90, 0.7)",
+      },
+    ],
+  };
+
+  const rankingOfClinicsThisMonthData = {
+    labels: rankingOfClinicsThisMonth?.map((clinic) => clinic?.clinicName),
+    datasets: [
+      {
+        label: "Atendimentos",
+        data: rankingOfClinicsThisMonth?.map((clinic) => clinic?.attendances),
+        backgroundColor: "rgba(248, 75, 90, 0.7)",
+      },
+    ],
+  };
 
   return (
     <Box
@@ -145,19 +119,29 @@ export default function Dashboard() {
 
       <Grid container spacing={2} sx={{ height: "100%", maxHeight: "100%" }}>
         <Grid item xs={6}>
-          <Chart
-            chartType="ColumnChart"
-            width="100%"
-            height="100%"
-            data={formattedRankingOfClinics}
+          <Bar
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top" as const,
+                },
+              },
+            }}
+            data={rankingOfClinicsData}
           />
         </Grid>
         <Grid item xs={6}>
-          <Chart
-            chartType="ColumnChart"
-            width="100%"
-            height="100%"
-            data={formattedRankingOfClinicsThisMonth}
+          <Bar
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "top" as const,
+                },
+              },
+            }}
+            data={rankingOfClinicsThisMonthData}
           />
         </Grid>
       </Grid>
