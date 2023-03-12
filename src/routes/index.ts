@@ -15,5 +15,5 @@ export const routes = [
   ...superadminRoutes,
   ...clinicAdmRoutes,
   ...coordinatorRoutes,
-  ...admSecretaryRoutes
+  ...admSecretaryRoutes,
 ];

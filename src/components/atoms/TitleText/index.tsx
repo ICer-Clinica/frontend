@@ -12,7 +12,7 @@ export default function TitleText({
   variant,
 }: TitleTextProps) {
   return (
-    <Typography color={color} variant={variant}>
+    <Typography color={color} variant={variant} sx={{ fontFamily: "Poppins" }}>
       {children}
     </Typography>
   );

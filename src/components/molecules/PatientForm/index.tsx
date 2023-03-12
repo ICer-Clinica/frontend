@@ -57,7 +57,6 @@ export default function PatientForm() {
       onSubmit={handleSubmit(onSubmit)}
     >
       <InputAction
-        shrink={true}
         label="Nome do Paciente"
         variant="outlined"
         fullWidth
@@ -67,7 +66,6 @@ export default function PatientForm() {
         onChange={handleChange}
       />
       <InputAction
-        shrink={true}
         label="Cartão SUS do Paciente"
         variant="outlined"
         fullWidth
@@ -77,7 +75,6 @@ export default function PatientForm() {
         onChange={handleChange}
       />
       <InputAction
-        shrink={true}
         label="CPF do Paciente"
         variant="outlined"
         fullWidth
@@ -93,7 +90,6 @@ export default function PatientForm() {
         }}
       >
         <InputAction
-          shrink={true}
           label="Data de nascimento do Paciente"
           variant="outlined"
           fullWidth
@@ -103,7 +99,6 @@ export default function PatientForm() {
           onChange={handleChange}
         />
         <InputAction
-          shrink={true}
           label="Nº de telefone do Paciente"
           variant="outlined"
           fullWidth

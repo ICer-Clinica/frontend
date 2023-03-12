@@ -7,6 +7,7 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
+import NoResults from "../NoResults";
 
 export type IColumns = {
   label: string;
@@ -43,6 +44,8 @@ export default function ListTable({ columns, rows }: IListTable): JSX.Element {
         },
         height: "70vh",
         maxHeight: "70vh",
+        width: "100%",
+        borderRadius: "20px",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -55,7 +58,7 @@ export default function ListTable({ columns, rows }: IListTable): JSX.Element {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row: any) => (
+          {rows?.map((row: any) => (
             <TableRow
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -69,6 +72,7 @@ export default function ListTable({ columns, rows }: IListTable): JSX.Element {
           ))}
         </TableBody>
       </Table>
+      <NoResults />
     </TableContainer>
   );
 }

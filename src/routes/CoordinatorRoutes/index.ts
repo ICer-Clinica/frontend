@@ -7,6 +7,7 @@ import Dashboard from "../../pages/Coordinator/Dashboard";
 import Patients from "../../pages/Coordinator/Patients";
 import Procedures from "../../pages/Coordinator/Procedures";
 import Therapists from "../../pages/Coordinator/Therapists";
+import UpdatePassword from "../../pages/UpdatePassword";
 
 const identify = "coordinator";
 
@@ -74,6 +75,11 @@ export const coordinatorRoutes = [
   {
     path: `/${identify}/patients/edit/:id`,
     element: Patient,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/update-password/:userId`,
+    element: UpdatePassword,
     isPrivate: true,
   },
 ];

@@ -3,6 +3,7 @@ import Therapist from "../../components/Forms/Therapist";
 import Dashboard from "../../pages/AdmSecretary/Dashboard";
 import Patients from "../../pages/AdmSecretary/Patients";
 import Therapists from "../../pages/AdmSecretary/Therapists";
+import UpdatePassword from "../../pages/UpdatePassword";
 
 const identify = "admnistrativeSecretary";
 
@@ -40,6 +41,11 @@ export const admSecretaryRoutes = [
   {
     path: `/${identify}/patients/edit/:id`,
     element: Patient,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/update-password/:userId`,
+    element: UpdatePassword,
     isPrivate: true,
   },
 ];

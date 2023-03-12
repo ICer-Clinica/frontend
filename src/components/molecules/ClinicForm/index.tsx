@@ -55,7 +55,6 @@ export default function ClinicForm({ type }: IClinicForm) {
       }}
     >
       <InputAction
-        shrink={true}
         label="Nome da clínica"
         variant="outlined"
         fullWidth
@@ -65,7 +64,6 @@ export default function ClinicForm({ type }: IClinicForm) {
         onChange={handleChange}
       />
       <InputAction
-        shrink={true}
         label="Rua da clínica"
         variant="outlined"
         fullWidth
@@ -81,7 +79,6 @@ export default function ClinicForm({ type }: IClinicForm) {
         }}
       >
         <InputAction
-          shrink={true}
           label="Número da clínica"
           variant="outlined"
           fullWidth
@@ -91,7 +88,6 @@ export default function ClinicForm({ type }: IClinicForm) {
           onChange={handleChange}
         />
         <InputAction
-          shrink={true}
           label="Bairro da clínica"
           variant="outlined"
           fullWidth
@@ -114,7 +110,6 @@ export default function ClinicForm({ type }: IClinicForm) {
       }}
     >
       <InputAction
-        shrink={true}
         label="Nome do administrador"
         variant="outlined"
         fullWidth
@@ -124,7 +119,6 @@ export default function ClinicForm({ type }: IClinicForm) {
         onChange={handleChange}
       />
       <InputAction
-        shrink={true}
         label="E-mail do administrador"
         variant="outlined"
         fullWidth
@@ -140,7 +134,6 @@ export default function ClinicForm({ type }: IClinicForm) {
         }}
       >
         <InputAction
-          shrink={true}
           label="Senha do administrador"
           variant="outlined"
           fullWidth
@@ -150,7 +143,6 @@ export default function ClinicForm({ type }: IClinicForm) {
           onChange={handleChange}
         />
         <InputAction
-          shrink={true}
           label="Confirme a senha"
           variant="outlined"
           fullWidth

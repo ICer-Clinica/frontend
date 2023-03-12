@@ -11,6 +11,7 @@ import Dashboard from "../../pages/ClinicAdm/Dashboard";
 import Patients from "../../pages/ClinicAdm/Patients";
 import Procedures from "../../pages/ClinicAdm/Procedures";
 import Therapists from "../../pages/ClinicAdm/Therapists";
+import UpdatePassword from "../../pages/UpdatePassword";
 
 const identify = "clinicAdm";
 
@@ -108,6 +109,11 @@ export const clinicAdmRoutes = [
   {
     path: `/${identify}/therapists/edit/:id`,
     element: Therapist,
+    isPrivate: true,
+  },
+  {
+    path: `/${identify}/update-password/:userId`,
+    element: UpdatePassword,
     isPrivate: true,
   },
 ];

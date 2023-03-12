@@ -83,7 +83,6 @@ export default function TherapistForm() {
         required
         type="text"
         name="name"
-        shrink={true}
         onChange={handleChange}
       />
       <InputAction
@@ -93,7 +92,6 @@ export default function TherapistForm() {
         required
         type="text"
         name="email"
-        shrink={true}
         onChange={handleChange}
       />
       <Select
@@ -115,7 +113,6 @@ export default function TherapistForm() {
           required
           type="password"
           name="password"
-          shrink={true}
           onChange={handleChange}
         />
         <InputAction
@@ -125,7 +122,6 @@ export default function TherapistForm() {
           required
           type="password"
           name="confirmPassword"
-          shrink={true}
           onChange={handleChange}
         />
       </Box>

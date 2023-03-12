@@ -69,7 +69,6 @@ export default function HealthSecretarieForm() {
         }}
       >
         <InputAction
-          shrink={true}
           label="Nome do Secretário"
           variant="outlined"
           fullWidth
@@ -79,7 +78,6 @@ export default function HealthSecretarieForm() {
           onChange={handleChange}
         />
         <InputAction
-          shrink={true}
           label="E-mail do Secretário"
           variant="outlined"
           fullWidth
@@ -95,7 +93,6 @@ export default function HealthSecretarieForm() {
           }}
         >
           <InputAction
-            shrink={true}
             label="Senha do Secretário"
             variant="outlined"
             fullWidth
@@ -105,7 +102,6 @@ export default function HealthSecretarieForm() {
             onChange={handleChange}
           />
           <InputAction
-            shrink={true}
             label="Confirmação de senha"
             variant="outlined"
             fullWidth

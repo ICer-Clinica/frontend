@@ -15,9 +15,11 @@ import { Icon } from "@iconify/react";
 
 import logo from "../../../assets/logo.svg";
 import { getOptionsDrawer } from "../../../utils/functions/GetOptionsDrawer";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TitleText from "../TitleText";
 import { getFristName } from "../../../utils/functions/GetFristName";
+import { Stack } from "@mui/material";
+import { getUserID } from "../../../utils/functions/getUserId";
 
 const drawerWidth = 240;
 
@@ -56,9 +58,24 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
         </Toolbar>
         <Divider />
         <Toolbar>
-          <TitleText variant="body1" color="primary.main">
-            Seja Bem-vindo, {getFristName()}
-          </TitleText>
+          <Stack spacing={2}>
+            <TitleText variant="body1" color="primary.main">
+              Seja Bem-vindo, {getFristName()}
+            </TitleText>
+            <Link
+              to={`${pathname?.split("/")[1]}/update-password/${getUserID()}`}
+              style={{
+                display: "flex",
+                gap: ".5rem",
+                alignItems: "center",
+                textDecoration: "none",
+                color: "#F84B5A",
+              }}
+            >
+              Redefinir senha{" "}
+              <Icon icon="material-symbols:arrow-right-alt-rounded" />
+            </Link>
+          </Stack>
         </Toolbar>
         <Divider />
         <List>

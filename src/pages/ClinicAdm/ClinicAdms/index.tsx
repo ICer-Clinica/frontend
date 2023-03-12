@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { removeClinicAdm } from "../../../components/atoms/CardList/request";
 import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
@@ -19,7 +19,7 @@ export default function ClinicAdms() {
   });
   const handleOpen = (id: string) => setOpen({ opened: true, id });
   const handleClose = () => setOpen({ opened: false, id: "" });
-  const api = new ApiService();
+  const queryClient = useQueryClient();
 
   const fetchClinicAdms = async () => {
     const api = new ApiService();
@@ -40,7 +40,8 @@ export default function ClinicAdms() {
 
   const { mutate, isLoading: mutateIsLoading } = useMutation(removeClinicAdm, {
     onSuccess: (data: any) => {
-      window.location.reload();
+      handleClose();
+      queryClient.invalidateQueries(["adms"]);
     },
     onError: (error) => {
       alert(error);

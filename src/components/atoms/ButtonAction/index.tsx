@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 
 interface ButtonActionProps {
   children: string | JSX.Element;
@@ -7,6 +7,7 @@ interface ButtonActionProps {
   type: "button" | "submit";
   fullWidth?: boolean;
   size?: "100%" | "50%" | "75%" | "35%" | "25%";
+  isLoading?: boolean;
 }
 
 export default function ButtonAction({
@@ -16,6 +17,7 @@ export default function ButtonAction({
   disabled,
   fullWidth,
   size,
+  isLoading,
 }: ButtonActionProps) {
   return (
     <Button
@@ -25,9 +27,18 @@ export default function ButtonAction({
       type={type}
       sx={{
         width: size,
+        "&.MuiButton-root": {
+          borderRadius: "20px",
+        },
       }}
     >
-      {children}
+      {!isLoading ? (
+        children
+      ) : (
+        <CircularProgress
+          color={variant === "contained" ? "secondary" : "primary"}
+        />
+      )}
     </Button>
   );
 }

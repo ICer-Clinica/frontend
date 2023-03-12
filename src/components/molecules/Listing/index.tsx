@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import ListTable, { IColumns } from "../../atoms/ListTable";
 import PageTitle from "../../atoms/PageTitle";
@@ -55,13 +55,21 @@ export default function Listing({
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button
-            type="button"
-            variant="contained"
-            onClick={() => navigate(link)}
-          >
-            {textButton} <Icon icon="ic:baseline-arrow-right-alt" width={30} />
-          </Button>
+          <Tooltip title={textButton}>
+            <IconButton
+              onClick={() => navigate(link)}
+              sx={{
+                backgroundColor: "#F84B5A",
+                borderRadius: "20%",
+                color: "white",
+                ":hover": {
+                  backgroundColor: "#DD404D",
+                },
+              }}
+            >
+              <Icon icon="material-symbols:add" width={30} />
+            </IconButton>
+          </Tooltip>
         </Box>
         <ListTable columns={columns} rows={rows} />
       </Box>
