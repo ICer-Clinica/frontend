@@ -7,6 +7,7 @@ export const schema = yup.object().shape({
   district: yup.string().required(),
   nameAdm: yup.string().required(),
   email: yup.string().email().required(),
-  password: yup.string().min(6).max(32).required(),
-  confirmPassword: yup.string().min(6).max(32).required(),
+  city: yup.string().required(),
+  state: yup.string().required(),
+  zip: yup.string().required()
 });

@@ -72,7 +72,7 @@ export default function ListTable({ columns, rows }: IListTable): JSX.Element {
           ))}
         </TableBody>
       </Table>
-      <NoResults />
+      {!rows?.length ? <NoResults /> : null}
     </TableContainer>
   );
 }

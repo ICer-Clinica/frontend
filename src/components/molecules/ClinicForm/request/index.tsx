@@ -4,14 +4,15 @@ import { ApiService } from "../../../../config/api";
 import { superadminEndpoints } from "../../../../utils/endpoints/superadmin";
 
 export const createClinic = async (data: IClinic) => {
-  const { street, number, district, name, nameAdm, email, password } = data;
+  const { street, number, district, name, nameAdm, email, city, state, zip } =
+    data;
 
   const api = new ApiService();
 
   const address: any = await api.RequestData(
     "POST",
     superadminEndpoints.createAddress,
-    { street, number, district }
+    { street, number, district, city, state, zip }
   );
 
   const clinic: any = await api.RequestData(
@@ -23,7 +24,7 @@ export const createClinic = async (data: IClinic) => {
   const adm = await api.RequestData(
     "POST",
     superadminEndpoints.createClinicAdm,
-    { name: nameAdm, email, password, clinic_id: clinic.id }
+    { name: nameAdm, email, clinic_id: clinic.id }
   );
 
   return adm;
@@ -43,7 +44,6 @@ export const updateClinic = async (data: IUpdateClinic) => {
     name,
     nameAdm,
     email,
-    password,
     address_id,
     adm_id,
     clinic_id,
@@ -66,7 +66,7 @@ export const updateClinic = async (data: IUpdateClinic) => {
   const adm = await api.RequestData(
     "PUT",
     superadminEndpoints.updateClinicAdm(adm_id),
-    { name: nameAdm, email, password, clinic_id: clinic.id }
+    { name: nameAdm, email, clinic_id: clinic.id }
   );
 
   return adm;

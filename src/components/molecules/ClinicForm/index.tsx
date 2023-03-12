@@ -17,8 +17,9 @@ export interface IClinic {
   district: string;
   nameAdm: string;
   email: string;
-  password: string;
-  confirmPassword: string;
+  city: string;
+  state: string;
+  zip: string;
 }
 
 interface IClinicForm {
@@ -28,7 +29,7 @@ interface IClinicForm {
 export default function ClinicForm({ type }: IClinicForm) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { mutate } = useMutation(createClinic, {
+  const { mutate, isLoading } = useMutation(createClinic, {
     onSuccess: (data: any) => {
       navigate(`/${pathname.split("/")[1]}/clinics`);
     },
@@ -97,6 +98,47 @@ export default function ClinicForm({ type }: IClinicForm) {
           onChange={handleChange}
         />
       </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+        }}
+      >
+        <InputAction
+          label="Cidade"
+          variant="outlined"
+          fullWidth
+          required
+          type="text"
+          name="city"
+          onChange={handleChange}
+        />
+        <InputAction
+          label="Estado"
+          variant="outlined"
+          fullWidth
+          required
+          type="text"
+          name="state"
+          onChange={handleChange}
+        />
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+        }}
+      >
+        <InputAction
+          label="CEP"
+          variant="outlined"
+          fullWidth
+          required
+          type="text"
+          name="zip"
+          onChange={handleChange}
+        />
+      </Box>
     </Box>
   );
 
@@ -127,31 +169,6 @@ export default function ClinicForm({ type }: IClinicForm) {
         name="email"
         onChange={handleChange}
       />
-      <Box
-        sx={{
-          display: "flex",
-          gap: 2,
-        }}
-      >
-        <InputAction
-          label="Senha do administrador"
-          variant="outlined"
-          fullWidth
-          required
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <InputAction
-          label="Confirme a senha"
-          variant="outlined"
-          fullWidth
-          required
-          type="password"
-          name="confirmPassword"
-          onChange={handleChange}
-        />
-      </Box>
     </Box>
   );
 
@@ -170,14 +187,6 @@ export default function ClinicForm({ type }: IClinicForm) {
   const onSubmit = async (data: IClinic) => {
     if (type === "CREATE") {
       mutate(data);
-    }
-    if (type === "UPDATE") {
-      updateClinicMutate({
-        ...data,
-        address_id: "1",
-        adm_id: "1",
-        clinic_id: "1",
-      });
     }
   };
 
@@ -202,7 +211,12 @@ export default function ClinicForm({ type }: IClinicForm) {
         <Divider orientation="vertical" flexItem />
         {renderStep2()}
       </Box>
-      <ButtonAction type="submit" fullWidth variant="contained">
+      <ButtonAction
+        type="submit"
+        fullWidth
+        variant="contained"
+        isLoading={isLoading}
+      >
         <>
           Concluir Cadastro <Icon icon="ic:round-check" width={30} />
         </>

@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { removeClinic } from "../../../components/atoms/CardList/request";
 import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
@@ -17,6 +17,7 @@ export default function Clinics() {
   const handleOpen = (id: string) => setOpen({ opened: true, id });
   const handleClose = () => setOpen({ opened: false, id: "" });
   const api = new ApiService();
+  const queryClient = useQueryClient();
   const fetchClinics = async () => {
     return api.RequestData("GET", superadminEndpoints.listAllClinics);
   };
@@ -36,7 +37,8 @@ export default function Clinics() {
 
   const { mutate, isLoading: mutateIsLoading } = useMutation(removeClinic, {
     onSuccess: (data: any) => {
-      window.location.reload();
+      handleClose();
+      queryClient.invalidateQueries(["clinics"]);
     },
     onError: (error) => {
       alert(error);
