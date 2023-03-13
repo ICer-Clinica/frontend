@@ -1,6 +1,7 @@
 import { admSecretaryOptions } from "../../UsersPermissions/AdmSecretary";
 import { clinicAdminOptions } from "../../UsersPermissions/ClinicAdm";
 import { coordinatorOptions } from "../../UsersPermissions/Coordinator";
+import { HealthSecretaryOptions } from "../../UsersPermissions/HealthSecretary";
 import { superadminOptions } from "../../UsersPermissions/Superadmin";
 
 export const getOptionsDrawer = (path: string) => {
@@ -15,5 +16,7 @@ export const getOptionsDrawer = (path: string) => {
       return coordinatorOptions;
     case "admnistrativeSecretary":
       return admSecretaryOptions
+    case "healthSecretary":
+      return HealthSecretaryOptions
   }
 };

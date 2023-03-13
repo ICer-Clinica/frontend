@@ -1,6 +1,7 @@
 import { admSecretaryRoutes } from "./AdmSecretaryRoutes";
 import { clinicAdmRoutes } from "./ClinicAdmRoutes";
 import { coordinatorRoutes } from "./CoordinatorRoutes";
+import { healthSecretaryRoutes } from "./HealthSecretaryRoutes";
 import { publicRoutes } from "./PublicRoutes";
 import { superadminRoutes } from "./SuperadminRoutes";
 
@@ -16,4 +17,5 @@ export const routes = [
   ...clinicAdmRoutes,
   ...coordinatorRoutes,
   ...admSecretaryRoutes,
+  ...healthSecretaryRoutes
 ];
