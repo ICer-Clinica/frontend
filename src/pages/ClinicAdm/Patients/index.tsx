@@ -12,6 +12,11 @@ import { ApiService } from "../../../config/api";
 import { clinicAdmEndpoints } from "../../../utils/endpoints/clinicAdm";
 import { getClinicID } from "../../../utils/functions/GetClinicID";
 import { humanizeTypes } from "../../../utils/functions/Humanize";
+import {
+  humanizeCellphone,
+  humanizeCPF,
+  humanizeSusCard,
+} from "../../../utils/functions/humanizers";
 export default function Patients() {
   const [patients, setPatients] = useState([]);
   const [open, setOpen] = useState({
@@ -56,10 +61,10 @@ export default function Patients() {
     patients?.forEach((clinic: any) => {
       const data = {
         name: clinic?.name,
-        susCard: clinic?.sus_card,
-        cpf: clinic?.cpf,
-        phone: clinic?.phone,
-        birthDate: clinic?.birth_date,
+        susCard: humanizeSusCard(clinic?.sus_card),
+        cpf: humanizeCPF(clinic?.cpf),
+        phone: humanizeCellphone(clinic?.phone),
+        birthDate: new Date(clinic?.birth_date)?.toLocaleDateString(),
         created_at: new Date(clinic?.created_at)?.toLocaleDateString("pt-br"),
         actions: (
           <Tooltip title="Remover">

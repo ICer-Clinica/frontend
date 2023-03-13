@@ -9,6 +9,9 @@ import Select from "../../atoms/Select";
 import { ISelect } from "../TherapistForm";
 import { createProcedure } from "./request";
 import { schema } from "./schema";
+import { PatternFormat } from "react-number-format";
+import { removeMasks } from "../../../utils/functions/removeMasks";
+import { getClinicID } from "../../../utils/functions/GetClinicID";
 
 export interface ITherapist {
   name: string;
@@ -50,7 +53,14 @@ export default function ProcedureForm() {
   });
 
   const onSubmit = (data: ITherapist) => {
-    mutate(data);
+    const { area, code, name } = data;
+    const dataToSend = {
+      code: removeMasks(code),
+      name,
+      area,
+      clinic_id: getClinicID(),
+    };
+    mutate(dataToSend);
   };
 
   return (
@@ -62,7 +72,9 @@ export default function ProcedureForm() {
       }}
       onSubmit={handleSubmit(onSubmit)}
     >
-      <InputAction
+      <PatternFormat
+        format="##.##.##.###-#"
+        customInput={InputAction}
         label="Código do Procedimento"
         variant="outlined"
         fullWidth
@@ -70,6 +82,7 @@ export default function ProcedureForm() {
         type="text"
         name="code"
         onChange={handleChange}
+        mask="_"
       />
       <InputAction
         label="Nome do Procedimento"

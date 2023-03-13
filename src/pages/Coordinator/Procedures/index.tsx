@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { removeProcedures } from "../../../components/atoms/CardList/request";
 import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
@@ -9,10 +9,12 @@ import { ApiService } from "../../../config/api";
 import { clinicAdmEndpoints } from "../../../utils/endpoints/clinicAdm";
 import { getClinicID } from "../../../utils/functions/GetClinicID";
 import { humanizeTypes } from "../../../utils/functions/Humanize";
+import { humanizeProcedureCode } from "../../../utils/functions/humanizers";
 import returnArea from "../../../utils/functions/returnArea";
 
 export default function Procedures() {
   const [procedures, setProcedures] = useState([]);
+  const queryClient = useQueryClient();
 
   const [open, setOpen] = useState({
     opened: false,
@@ -40,7 +42,8 @@ export default function Procedures() {
 
   const { mutate, isLoading: mutateIsLoading } = useMutation(removeProcedures, {
     onSuccess: (data: any) => {
-      window.location.reload();
+      handleClose();
+      queryClient.invalidateQueries(["procedures"]);
     },
     onError: (error) => {
       alert(error);
@@ -56,7 +59,7 @@ export default function Procedures() {
     procedures?.forEach((clinic: any) => {
       const data = {
         name: clinic?.name,
-        code: clinic?.code,
+        code: humanizeProcedureCode(clinic?.code),
         area: returnArea(clinic?.area),
         created_at: new Date(clinic?.created_at)?.toLocaleDateString("pt-br"),
         actions: (

@@ -2,8 +2,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Icon } from "@iconify/react";
 import { Box } from "@mui/material";
 import { useForm } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 import { useMutation } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
+import { convertDate } from "../../../utils/functions/convertDate";
+import { getClinicID } from "../../../utils/functions/GetClinicID";
+import { removeMasks } from "../../../utils/functions/removeMasks";
 import ButtonAction from "../../atoms/ButtonAction";
 import InputAction from "../../atoms/InputAction";
 import { createPatient } from "./request";
@@ -34,7 +38,7 @@ export default function PatientForm() {
     setValue(event.target.name, event.target.value);
   };
 
-  const { mutate } = useMutation(createPatient, {
+  const { mutate, isLoading } = useMutation(createPatient, {
     onSuccess(data) {
       navigate(`/${pathname.split("/")[1]}/patients`);
     },
@@ -44,7 +48,17 @@ export default function PatientForm() {
   });
 
   const onSubmit = (data: IPatient) => {
-    mutate(data);
+    const { sus_card, birth_date, cpf, name, phone } = data;
+    const dataToSend = {
+      name,
+      sus_card: removeMasks(sus_card),
+      phone: removeMasks(phone),
+      cpf: removeMasks(cpf),
+      birth_date: new Date(convertDate(birth_date))?.toISOString(),
+      clinic_id: getClinicID(),
+    };
+
+    mutate(dataToSend);
   };
 
   return (
@@ -64,8 +78,14 @@ export default function PatientForm() {
         type="text"
         name="name"
         onChange={handleChange}
+        error={Boolean(errors?.name?.message)}
+        helperText={errors?.name?.message}
       />
-      <InputAction
+      <PatternFormat
+        format="### #### #### ####"
+        allowEmptyFormatting
+        mask="_"
+        customInput={InputAction}
         label="Cartão SUS do Paciente"
         variant="outlined"
         fullWidth
@@ -73,8 +93,14 @@ export default function PatientForm() {
         type="text"
         name="sus_card"
         onChange={handleChange}
+        error={Boolean(errors?.sus_card?.message)}
+        helperText={errors?.sus_card?.message}
       />
-      <InputAction
+      <PatternFormat
+        format="###.###.###-##"
+        allowEmptyFormatting
+        mask="_"
+        customInput={InputAction}
         label="CPF do Paciente"
         variant="outlined"
         fullWidth
@@ -82,6 +108,8 @@ export default function PatientForm() {
         type="text"
         name="cpf"
         onChange={handleChange}
+        error={Boolean(errors?.cpf?.message)}
+        helperText={errors?.cpf?.message}
       />
       <Box
         sx={{
@@ -89,7 +117,11 @@ export default function PatientForm() {
           gap: 1,
         }}
       >
-        <InputAction
+        <PatternFormat
+          format="##/##/####"
+          allowEmptyFormatting
+          mask="_"
+          customInput={InputAction}
           label="Data de nascimento do Paciente"
           variant="outlined"
           fullWidth
@@ -97,8 +129,14 @@ export default function PatientForm() {
           type="text"
           name="birth_date"
           onChange={handleChange}
+          error={Boolean(errors?.birth_date?.message)}
+          helperText={errors?.birth_date?.message}
         />
-        <InputAction
+        <PatternFormat
+          format="(##) #####-####"
+          allowEmptyFormatting
+          mask="_"
+          customInput={InputAction}
           label="Nº de telefone do Paciente"
           variant="outlined"
           fullWidth
@@ -106,9 +144,16 @@ export default function PatientForm() {
           type="text"
           name="phone"
           onChange={handleChange}
+          error={Boolean(errors?.phone?.message)}
+          helperText={errors?.phone?.message}
         />
       </Box>
-      <ButtonAction type="submit" fullWidth variant="contained">
+      <ButtonAction
+        type="submit"
+        fullWidth
+        variant="contained"
+        isLoading={isLoading}
+      >
         <>
           Concluir Cadastro <Icon icon="ic:round-check" width={30} />
         </>
