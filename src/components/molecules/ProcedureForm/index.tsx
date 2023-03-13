@@ -5,13 +5,23 @@ import { useMutation } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import ButtonAction from "../../atoms/ButtonAction";
 import InputAction from "../../atoms/InputAction";
+import Select from "../../atoms/Select";
+import { ISelect } from "../TherapistForm";
 import { createProcedure } from "./request";
 import { schema } from "./schema";
 
 export interface ITherapist {
   name: string;
   code: string;
+  area: string;
 }
+
+const areas = [
+  { label: "Psicologia", value: "PSYCHOLOGY" },
+  { label: "Fisioterapia", value: "PHYSIOTHERAPY" },
+  { label: "Fonoaudiologia", value: "PHONOAUDIOLOGY" },
+  { label: "Terapia Ocupacional", value: "OCCUPATIONAL_THERAPY" },
+] as ISelect[];
 
 export default function ProcedureForm() {
   const navigate = useNavigate();
@@ -30,7 +40,7 @@ export default function ProcedureForm() {
     setValue(event.target.name, event.target.value);
   };
 
-  const { mutate } = useMutation(createProcedure, {
+  const { mutate, isLoading } = useMutation(createProcedure, {
     onSuccess: (data: any) => {
       navigate(`/${pathname.split("/")[1]}/procedures`);
     },
@@ -70,7 +80,18 @@ export default function ProcedureForm() {
         name="name"
         onChange={handleChange}
       />
-      <ButtonAction type="submit" fullWidth variant="contained">
+      <Select
+        label="Área do procedimento"
+        values={areas}
+        name="area"
+        onChange={handleChange}
+      />
+      <ButtonAction
+        type="submit"
+        fullWidth
+        variant="contained"
+        isLoading={isLoading}
+      >
         <>
           Concluir Cadastro <Icon icon="ic:round-check" width={30} />
         </>

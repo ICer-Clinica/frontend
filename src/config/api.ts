@@ -4,7 +4,7 @@ import baseURL from "./baseURL";
 export class ApiService {
   private apiURL: any;
   constructor() {
-    this.apiURL = baseURL.baseURLDev;
+    this.apiURL = baseURL.baseURLProd;
   }
   public RequestData = (
     HTTPMethod: Method,
