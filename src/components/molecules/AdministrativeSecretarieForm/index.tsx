@@ -10,6 +10,7 @@ import { useMutation } from "react-query";
 import { createAdministrativeSecretary } from "./request";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getClinicID } from "../../../utils/functions/GetClinicID";
+import EmailMessage from "../../atoms/EmailMessage";
 
 export interface ISecretarie {
   name: string;
@@ -33,13 +34,9 @@ export default function AdministrativeSecretarieForm() {
 
   const handleChange = (event: any) => {
     setValue(event.target.name, event.target.value);
-    setError("confirmPassword", {
-      type: "custom",
-      message: "Senhas não são iguais.",
-    });
   };
 
-  const { mutate } = useMutation(createAdministrativeSecretary, {
+  const { mutate, isLoading } = useMutation(createAdministrativeSecretary, {
     onSuccess: (data: any) => {
       navigate(`/${pathname.split("/")[1]}/administrative-secretaries`);
     },
@@ -93,37 +90,11 @@ export default function AdministrativeSecretarieForm() {
           name="email"
           onChange={handleChange}
         />
-        <Box
-          sx={{
-            display: "flex",
-            gap: 1,
-          }}
-        >
-          <InputAction
-            label="Senha do Secretário"
-            variant="outlined"
-            fullWidth
-            required
-            type="password"
-            name="password"
-            onChange={handleChange}
-          />
-          <InputAction
-            label="Confirmação de senha"
-            variant="outlined"
-            fullWidth
-            required
-            type="password"
-            name="confirmPassword"
-            onChange={handleChange}
-          />
-        </Box>
-        {errors.confirmPassword && (
-          <TitleText variant="body2" color="primary.main">
-            {errors.confirmPassword.message}
-          </TitleText>
-        )}
-        <ButtonAction type="submit" fullWidth variant="contained">
+        <EmailMessage />
+        <ButtonAction 
+          disabled={isLoading}
+          isLoading={isLoading}
+          type="submit" fullWidth variant="contained">
           <>
             Concluir Cadastro <Icon icon="ic:round-check" width={30} />
           </>

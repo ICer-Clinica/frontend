@@ -97,7 +97,7 @@ export default function AdministrativeSecretaries() {
         data={admSecretaries}
         type="admSecretaries"
         isLoading={isLoading}
-        link="/clinicAdm/administrative-secretaries/create"
+        link="/coordinator/administrative-secretaries/create"
         columns={[
           { label: "Nome", value: "name" },
           { label: "E-mail", value: "email" },

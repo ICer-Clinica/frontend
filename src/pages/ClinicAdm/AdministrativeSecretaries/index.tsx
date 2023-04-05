@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
   removeAdministrativeSecretaries,
   removeCoordinators,
@@ -14,6 +14,7 @@ import { getClinicID } from "../../../utils/functions/GetClinicID";
 import { humanizeTypes } from "../../../utils/functions/Humanize";
 
 export default function AdministrativeSecretaries() {
+  const queryClient = useQueryClient();
   const [admSecretaries, setAdmSecretaries] = useState([]);
 
   const [open, setOpen] = useState({
@@ -33,7 +34,7 @@ export default function AdministrativeSecretaries() {
 
   const { isLoading } = useQuery("adm-secretaries", fetchAdmSecretaries, {
     onSuccess(data: any) {
-      setAdmSecretaries(data);
+      setAdmSecretaries(data)
     },
     onError(err) {
       console.log(err);
@@ -44,7 +45,8 @@ export default function AdministrativeSecretaries() {
     removeAdministrativeSecretaries,
     {
       onSuccess: (data: any) => {
-        window.location.reload();
+        setOpen({...open, opened: false})
+        queryClient.invalidateQueries(['adm-secretaries'])
       },
       onError: (error) => {
         alert(error);

@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { removeCoordinators } from "../../../components/atoms/CardList/request";
 import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
@@ -11,6 +11,7 @@ import { getClinicID } from "../../../utils/functions/GetClinicID";
 import { humanizeTypes } from "../../../utils/functions/Humanize";
 
 export default function Coordinators() {
+  const queryClient = useQueryClient()
   const [coordinators, setCoordinators] = useState([]);
   const [open, setOpen] = useState({
     opened: false,
@@ -40,7 +41,8 @@ export default function Coordinators() {
     removeCoordinators,
     {
       onSuccess: (data: any) => {
-        window.location.reload();
+        setOpen({...open, opened: false})
+        queryClient.invalidateQueries(['coordinators'])
       },
       onError: (error) => {
         alert(error);

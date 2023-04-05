@@ -9,6 +9,7 @@ import InputAction from "../../atoms/InputAction";
 import TitleText from "../../atoms/TitleText";
 import { createCoordinators } from "./request";
 import { schema } from "./schema";
+import EmailMessage from "../../atoms/EmailMessage";
 
 export interface ICoordinator {
   name: string;
@@ -32,13 +33,9 @@ export default function CoordinatorForm() {
 
   const handleChange = (event: any) => {
     setValue(event.target.name, event.target.value);
-    setError("confirmPassword", {
-      type: "custom",
-      message: "Senhas não são iguais.",
-    });
   };
 
-  const { mutate } = useMutation(createCoordinators, {
+  const { mutate, isLoading } = useMutation(createCoordinators, {
     onSuccess: (data: any) => {
       navigate(`/${pathname.split("/")[1]}/coordinators`);
     },
@@ -78,37 +75,13 @@ export default function CoordinatorForm() {
         name="email"
         onChange={handleChange}
       />
-      <Box
-        sx={{
-          display: "flex",
-          gap: 1,
-        }}
-      >
-        <InputAction
-          label="Senha do Coordenador"
-          variant="outlined"
-          fullWidth
-          required
-          type="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <InputAction
-          label="Confirmação de senha"
-          variant="outlined"
-          fullWidth
-          required
-          type="password"
-          name="confirmPassword"
-          onChange={handleChange}
-        />
-      </Box>
-      {errors.confirmPassword && (
-        <TitleText variant="body2" color="primary.main">
-          {errors.confirmPassword.message}
-        </TitleText>
-      )}
-      <ButtonAction type="submit" fullWidth variant="contained">
+      <EmailMessage />
+      <ButtonAction 
+        isLoading={isLoading}
+        disabled={isLoading} 
+        type="submit" 
+        fullWidth 
+        variant="contained">
         <>
           Concluir Cadastro <Icon icon="ic:round-check" width={30} />
         </>

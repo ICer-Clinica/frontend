@@ -1,8 +1,8 @@
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useMutation, useQuery } from "react-query";
-import { removeCoordinators } from "../../../components/atoms/CardList/request";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { removeCoordinators, removeTherapists } from "../../../components/atoms/CardList/request";
 import ModalConfirm from "../../../components/atoms/ModalConfirm";
 import Listing from "../../../components/molecules/Listing";
 import { ApiService } from "../../../config/api";
@@ -19,6 +19,7 @@ export default function Therapists() {
   });
   const handleOpen = (id: string) => setOpen({ opened: true, id });
   const handleClose = () => setOpen({ opened: false, id: "" });
+  const queryClient = useQueryClient()
 
   const fetchTherapists = async () => {
     const api = new ApiService();
@@ -38,10 +39,11 @@ export default function Therapists() {
   });
 
   const { mutate, isLoading: mutateIsLoading } = useMutation(
-    removeCoordinators,
+    removeTherapists,
     {
       onSuccess: (data: any) => {
-        window.location.reload();
+        setOpen({...open, opened: false})
+        queryClient.invalidateQueries(['therapists'])
       },
       onError: (error) => {
         alert(error);

@@ -100,7 +100,7 @@ export default function Patients() {
         data={patients}
         type="patients"
         isLoading={isLoading}
-        link="/clinicAdm/patients/create"
+        link="/coordinator/patients/create"
         columns={[
           { label: "Nome", value: "name" },
           { label: "Cartão SUS", value: "susCard" },

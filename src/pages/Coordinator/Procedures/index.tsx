@@ -96,7 +96,7 @@ export default function Procedures() {
         data={procedures}
         type="procedures"
         isLoading={isLoading}
-        link="/clinicAdm/procedures/create"
+        link="/coordinator/procedures/create"
         columns={[
           { label: "Código", value: "code" },
           { label: "Nome", value: "name" },

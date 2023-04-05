@@ -95,7 +95,7 @@ export default function Therapists() {
         data={therapists}
         type="therapists"
         isLoading={isLoading}
-        link="/clinicAdm/therapists/create"
+        link="/coordinator/therapists/create"
         columns={[
           { label: "Nome", value: "name" },
           { label: "E-mail", value: "email" },

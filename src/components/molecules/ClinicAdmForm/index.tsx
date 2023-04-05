@@ -80,6 +80,7 @@ export default function ClinicAdmForm() {
         fullWidth
         variant="contained"
         isLoading={isLoading}
+        disabled={isLoading}
       >
         <>
           Concluir Cadastro <Icon icon="ic:round-check" width={30} />
