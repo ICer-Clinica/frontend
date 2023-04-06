@@ -2,9 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IClinic } from "..";
 import { ApiService } from "../../../../config/api";
 import { superadminEndpoints } from "../../../../utils/endpoints/superadmin";
+import { removeMasks } from "../../../../utils/functions/removeMasks";
 
 export const createClinic = async (data: IClinic) => {
-  const { street, number, district, name, nameAdm, email, city, state, zip } =
+  const { street, number, district, name, nameAdm, email, city, state, zip, cnpj, phone, clinicEmail } =
     data;
 
   const api = new ApiService();
@@ -12,13 +13,18 @@ export const createClinic = async (data: IClinic) => {
   const address: any = await api.RequestData(
     "POST",
     superadminEndpoints.createAddress,
-    { street, number, district, city, state, zip }
+    { street, number, district, city, state, zip: removeMasks(zip) }
   );
 
   const clinic: any = await api.RequestData(
     "POST",
     superadminEndpoints.createClinic,
-    { name, address_id: address.id }
+    { name, 
+      cnpj: removeMasks(cnpj), 
+      phone: removeMasks(phone), 
+      email: removeMasks(clinicEmail) || null,
+      address_id: address.id 
+    }
   );
 
   const adm = await api.RequestData(

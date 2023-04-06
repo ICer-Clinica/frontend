@@ -9,6 +9,7 @@ import ButtonAction from "../../atoms/ButtonAction";
 import InputAction from "../../atoms/InputAction";
 import { createClinic, updateClinic } from "./request";
 import { schema } from "./schema";
+import { PatternFormat } from "react-number-format";
 
 export interface IClinic {
   name: string;
@@ -20,6 +21,9 @@ export interface IClinic {
   city: string;
   state: string;
   zip: string;
+  cnpj: string;
+  phone: string;
+  clinicEmail?: string
 }
 
 interface IClinicForm {
@@ -129,15 +133,19 @@ export default function ClinicForm({ type }: IClinicForm) {
           gap: 2,
         }}
       >
-        <InputAction
-          label="CEP"
-          variant="outlined"
-          fullWidth
-          required
-          type="text"
-          name="zip"
-          onChange={handleChange}
-        />
+        <PatternFormat
+        format="#####-###"
+        allowEmptyFormatting
+        mask="_"
+        customInput={InputAction}
+        label="CEP"
+        variant="outlined"
+        fullWidth
+        required
+        type="text"
+        name="zip"
+        onChange={handleChange}
+      />
       </Box>
     </Box>
   );
@@ -151,6 +159,40 @@ export default function ClinicForm({ type }: IClinicForm) {
         width: "100%",
       }}
     >
+      <PatternFormat
+        format="##.###.###/####-##"
+        allowEmptyFormatting
+        mask="_"
+        customInput={InputAction}
+        label="CNPJ da clínica"
+        variant="outlined"
+        fullWidth
+        required
+        type="text"
+        name="cnpj"
+        onChange={handleChange}
+      />
+      <PatternFormat
+        format="(##) #####-####"
+        allowEmptyFormatting
+        mask="_"
+        customInput={InputAction}
+        label="Telefone da clínica"
+        variant="outlined"
+        fullWidth
+        required
+        type="text"
+        name="phone"
+        onChange={handleChange}
+      />
+      <InputAction
+        label="E-mail da clínica"
+        variant="outlined"
+        fullWidth
+        type="email"
+        name="clinicEmail"
+        onChange={handleChange}
+      />
       <InputAction
         label="Nome do administrador"
         variant="outlined"
@@ -165,7 +207,7 @@ export default function ClinicForm({ type }: IClinicForm) {
         variant="outlined"
         fullWidth
         required
-        type="text"
+        type="email"
         name="email"
         onChange={handleChange}
       />

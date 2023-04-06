@@ -8,6 +8,7 @@ import Listing from "../../../components/molecules/Listing";
 import { ApiService } from "../../../config/api";
 import { superadminEndpoints } from "../../../utils/endpoints/superadmin";
 import { humanizeTypes } from "../../../utils/functions/Humanize";
+import { humanizeCNPJ, humanizeCellphone } from "../../../utils/functions/humanizers";
 
 export default function Clinics() {
   const [open, setOpen] = useState({
@@ -54,8 +55,11 @@ export default function Clinics() {
       console.log(clinic);
 
       const data = {
+        cnpj: humanizeCNPJ(clinic?.cnpj),
+        phone: humanizeCellphone(clinic?.phone),
+        email: clinic?.email ?? '-',
         name: clinic?.name,
-        address: `${clinic?.address?.street}, ${clinic?.address?.number}, ${clinic?.address?.city}-${clinic?.address?.state} `,
+        adm: clinic?.administrator?.email,
         created_at: new Date(clinic?.created_at)?.toLocaleDateString("pt-br"),
         actions: (
           <Tooltip title="Remover">
@@ -94,8 +98,11 @@ export default function Clinics() {
         type="clinic"
         columns={[
           { label: "Criado em", value: "created_at" },
+          { label: "CNPJ", value: "cnpj" },
+          { label: "Telefone", value: "phone" },
+          { label: "E-mail", value: "email" },
           { label: "Nome", value: "name" },
-          { label: "Endereço", value: "address" },
+          {label: '1° Administrador', value: 'adm'},
           { label: "Ações", value: "actions" },
         ]}
         rows={rows}

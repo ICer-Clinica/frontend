@@ -6,6 +6,14 @@ export function humanizeCPF(value: string): string {
     return '';
 }
 
+export function humanizeCNPJ(value: string): string {
+    if (value && value.length) {
+        const cpf = value.replace(/[^\d]/g, '');
+        return cpf.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+    }
+    return '';
+}
+
 export function humanizeCellphone(value: string): string {
     if (value && value.length > 11) {
         const cellphone = value.replace(/[^\d]/g, '');

@@ -58,16 +58,22 @@ export default function Listing({
           <Tooltip title={textButton}>
             <IconButton
               onClick={() => navigate(link)}
-              sx={{
+              sx={(theme) => ({
                 backgroundColor: "#F84B5A",
                 borderRadius: "20%",
                 color: "white",
+                width: '2.7rem',
+                height:'2.7rem',
+                [theme.breakpoints.down('md')]: {
+                  width: '2.16rem',
+                  height:'2.16rem',
+                },
                 ":hover": {
                   backgroundColor: "#DD404D",
                 },
-              }}
+              })}
             >
-              <Icon icon="material-symbols:add" width={30} />
+              <Icon icon="material-symbols:add" />
             </IconButton>
           </Tooltip>
         </Box>

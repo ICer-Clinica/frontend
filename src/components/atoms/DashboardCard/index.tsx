@@ -1,7 +1,5 @@
 import Paper from "@mui/material/Paper";
 import TitleText from "../TitleText";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 
 interface IDashboardCard {
   title: string;
@@ -29,14 +27,6 @@ export default function DashboardCard({ title, value }: IDashboardCard) {
       <TitleText color="secondary.contrastText" variant="h1">
         {value}
       </TitleText>
-      <IconButton
-        color="primary"
-        aria-label="upload picture"
-        component="label"
-        sx={{ position: "absolute", right: "1%", top: "2%" }}
-      >
-        <InfoIcon />
-      </IconButton>
     </Paper>
   );
 }

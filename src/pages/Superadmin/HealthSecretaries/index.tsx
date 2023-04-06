@@ -87,7 +87,7 @@ export default function HealthSecretaries() {
         data={secretaries}
         isLoading={isLoading}
         textButton="Cadastrar Secretário de Saúde"
-        title="Esses são os Secretários de Saúde cadastrados."
+        title="Secretários de Saúde"
         link="/superadmin/health-secretaries/create"
         type="healthSecretary"
         columns={[

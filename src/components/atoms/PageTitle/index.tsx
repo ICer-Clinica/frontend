@@ -1,5 +1,5 @@
 import TitleText from "../TitleText";
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Typography} from "@mui/material";
 
 interface IPageTitle {
   title: string;
@@ -8,9 +8,15 @@ interface IPageTitle {
 export default function PageTitle({ title }: IPageTitle): JSX.Element {
   return (
     <Box>
-      <TitleText color="primary.main" variant="h1">
-        {title}
-      </TitleText>
+      <Typography color="primary.main" variant="h1" sx={(theme) => ({ 
+        fontFamily: "Poppins",
+        fontSize: '2.25rem',
+        [theme.breakpoints.down('xl')]: {
+          fontSize: '1.8rem',
+        }
+      })}>
+      {title}
+      </Typography>
       <Divider />
     </Box>
   );

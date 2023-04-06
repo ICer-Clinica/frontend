@@ -1,25 +1,22 @@
-import * as React from "react";
+import { Icon } from "@iconify/react";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { Icon } from "@iconify/react";
+import Toolbar from "@mui/material/Toolbar";
+import * as React from "react";
 
-import logo from "../../../assets/logo.svg";
-import { getOptionsDrawer } from "../../../utils/functions/GetOptionsDrawer";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import TitleText from "../TitleText";
+import logo from "../../../assets/logo.svg";
 import { getFristName } from "../../../utils/functions/GetFristName";
-import { Stack } from "@mui/material";
+import { getOptionsDrawer } from "../../../utils/functions/GetOptionsDrawer";
 import { getUserID } from "../../../utils/functions/getUserId";
+import TitleText from "../TitleText";
 
 const drawerWidth = 240;
 
@@ -48,7 +45,18 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
+            '::-webkit-scrollbar': {
+              width: '5px'
+            },
+            '::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '::-webkit-scrollbar-thumb': {
+              background: '#F84B5A',
+              borderRadius: '30px'
+            }
           },
+          
         }}
         variant="permanent"
         anchor="left"
@@ -57,10 +65,10 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
           <img src={logo} alt="iCER" width={"50%"} />
         </Toolbar>
         <Divider />
-        <Toolbar>
-          <Stack spacing={2}>
+        <Toolbar sx={{ display: 'flex', flexDirection: 'column', margin: '2rem 0', justifyContent: 'center', alignItems: 'flex-start', gap: '1rem' }}>
+          
             <TitleText variant="body1" color="primary.main">
-              Seja Bem-vindo, {getFristName()}
+              Seja Bem-vindo, <b>{getFristName()}</b>
             </TitleText>
             <Link
               to={`${pathname?.split("/")[1]}/update-password/${getUserID()}`}
@@ -75,7 +83,6 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
               Redefinir senha{" "}
               <Icon icon="material-symbols:arrow-right-alt-rounded" />
             </Link>
-          </Stack>
         </Toolbar>
         <Divider />
         <List>

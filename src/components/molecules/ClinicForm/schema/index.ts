@@ -9,5 +9,8 @@ export const schema = yup.object().shape({
   email: yup.string().email().required(),
   city: yup.string().required(),
   state: yup.string().required(),
-  zip: yup.string().required()
+  zip: yup.string().required(),
+  cnpj: yup.string().required(),
+  phone: yup.string().required(),
+  clinicEmail: yup.string().nullable(),
 });
