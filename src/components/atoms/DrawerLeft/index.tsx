@@ -45,18 +45,17 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             boxSizing: "border-box",
-            '::-webkit-scrollbar': {
-              width: '5px'
+            "::-webkit-scrollbar": {
+              width: "5px",
             },
-            '::-webkit-scrollbar-track': {
-              background: 'transparent',
+            "::-webkit-scrollbar-track": {
+              background: "transparent",
             },
-            '::-webkit-scrollbar-thumb': {
-              background: '#F84B5A',
-              borderRadius: '30px'
-            }
+            "::-webkit-scrollbar-thumb": {
+              background: "#F84B5A",
+              borderRadius: "30px",
+            },
           },
-          
         }}
         variant="permanent"
         anchor="left"
@@ -65,24 +64,35 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
           <img src={logo} alt="iCER" width={"50%"} />
         </Toolbar>
         <Divider />
-        <Toolbar sx={{ display: 'flex', flexDirection: 'column', margin: '2rem 0', justifyContent: 'center', alignItems: 'flex-start', gap: '1rem' }}>
-          
-            <TitleText variant="body1" color="primary.main">
-              Seja Bem-vindo, <b>{getFristName()}</b>
-            </TitleText>
-            <Link
-              to={`${pathname?.split("/")[1]}/update-password/${getUserID()}`}
-              style={{
-                display: "flex",
-                gap: ".5rem",
-                alignItems: "center",
-                textDecoration: "none",
-                color: "#F84B5A",
-              }}
-            >
-              Redefinir senha{" "}
-              <Icon icon="material-symbols:arrow-right-alt-rounded" />
-            </Link>
+        <Toolbar
+          sx={(theme) => ({
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            gap: "1rem",
+            fontSize: "1rem",
+            [theme.breakpoints.down("xl")]: {
+              fontSize: ".8rem",
+            },
+          })}
+        >
+          <TitleText variant="body1" color="primary.main">
+            Seja Bem-vindo, <b>{getFristName()}</b>
+          </TitleText>
+          <Link
+            to={`${pathname?.split("/")[1]}/update-password/${getUserID()}`}
+            style={{
+              display: "flex",
+              gap: ".5rem",
+              alignItems: "center",
+              textDecoration: "none",
+              color: "#F84B5A",
+            }}
+          >
+            Redefinir senha{" "}
+            <Icon icon="material-symbols:arrow-right-alt-rounded" />
+          </Link>
         </Toolbar>
         <Divider />
         <List>
@@ -93,7 +103,17 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
                   <ListItemIcon>
                     <Icon icon={option.icon} />
                   </ListItemIcon>
-                  <ListItemText primary={option.name} />
+                  <ListItemText
+                    primary={option.name}
+                    sx={(theme) => ({
+                      span: {
+                        fontSize: "1rem",
+                        [theme.breakpoints.down("xl")]: {
+                          fontSize: ".8rem",
+                        },
+                      },
+                    })}
+                  />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -105,7 +125,17 @@ export default function DrawerLeft({ children }: DrawerLeftProps) {
               <ListItemIcon>
                 <Icon icon="ic:baseline-logout" />
               </ListItemIcon>
-              <ListItemText primary={"Sair"} />
+              <ListItemText
+                primary={"Sair"}
+                sx={(theme) => ({
+                  span: {
+                    fontSize: "1rem",
+                    [theme.breakpoints.down("xl")]: {
+                      fontSize: ".8rem",
+                    },
+                  },
+                })}
+              />
             </ListItemButton>
           </ListItem>
         </List>

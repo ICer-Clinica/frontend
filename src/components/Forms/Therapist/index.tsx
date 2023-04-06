@@ -1,8 +1,8 @@
 import { Box, Divider } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { CreateOrEdit } from "../../../utils/functions/CreateOrEdit";
+import PageTitle from "../../atoms/PageTitle";
 import PaperAtom from "../../atoms/PaperAtom";
-import TitleText from "../../atoms/TitleText";
 import TherapistForm from "../../molecules/TherapistForm";
 
 export default function Therapist() {
@@ -10,9 +10,7 @@ export default function Therapist() {
 
   return (
     <Box>
-      <TitleText color="primary.main" variant="h1">
-        {CreateOrEdit(pathname)} terapeuta
-      </TitleText>
+      <PageTitle title={`${CreateOrEdit(pathname)} terapeuta`} />
       <Divider sx={{ marginBottom: "12px" }} />
       <PaperAtom size="100%">
         <TherapistForm />
